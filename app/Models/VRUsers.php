@@ -17,4 +17,13 @@ class VRUsers extends Model
      * @var array
      */
     protected $fillable = ['id','name','email','password','	remember_token','phone'];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(VRRoles::class, 'vr_connections_users_roles', 'user_id', 'role_id' );
+    }
 }
