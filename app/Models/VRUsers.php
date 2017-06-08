@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class VRUsers extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
+    public $incrementing = false;
+    use SoftDeletes;
     /**
      * Table name
      * @var string

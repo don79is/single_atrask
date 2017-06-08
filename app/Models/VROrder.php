@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VROrder extends Model
+class VROrder extends CoreModel
 {
     /**
      * Table name

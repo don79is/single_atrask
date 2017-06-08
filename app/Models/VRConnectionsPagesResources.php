@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRConnectionsPagesResources extends Model
+class VRConnectionsPagesResources extends CoreModel
 {
     /**
      * Table name

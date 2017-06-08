@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRLanguageCodes extends Model
+class VRLanguageCodes extends CoreModel
 {
     /**
      * Table name

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRReservations extends Model
+class VRReservations extends CoreModel
 {
     /**
      * Table name

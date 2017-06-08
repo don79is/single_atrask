@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRRoles extends Model
+class VRRoles extends CoreModel
 {
     /**
      * Table name
