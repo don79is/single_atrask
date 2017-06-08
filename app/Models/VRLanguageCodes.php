@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRLanguageCodes extends CoreModel
+class VRLanguageCodes extends Model
 {
     /**
      * Table name
@@ -17,4 +17,6 @@ class VRLanguageCodes extends CoreModel
      * @var array
      */
     protected $fillable = ['id','language_code'];
+
+    protected $updated_at = false;
 }
