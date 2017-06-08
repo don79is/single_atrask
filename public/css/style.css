@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+}
+
+#menu {
+    position: fixed;
+    background-color: #222D32;
+    width: 300px;
+    height: 100%;
+
+}
+#menu h2 {
+    color: white;
+}
+
+#menu a {
+    color: #B8C7CE;
+}
+#list {
+padding-left: 300px;
+    width: 100%;
+    height: 100%;
+    background-color: #985f0d;
+}

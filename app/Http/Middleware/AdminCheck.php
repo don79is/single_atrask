@@ -15,9 +15,10 @@ class AdminCheck
      */
     public function handle($request, Closure $next)
     {
-        dd(auth()->user()->toArray());
+        if (in_array('super-admin', auth()->user()->roles->pluck('id')->toArray()))
+        {
+            return $next($request);
+        }
 
-
-        return $next($request);
     }
 }

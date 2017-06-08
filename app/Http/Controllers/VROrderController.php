@@ -10,9 +10,9 @@ class VROrderController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function adminindex()
 	{
-		//
+		return view('admin.adminList');
 	}
 
 	/**

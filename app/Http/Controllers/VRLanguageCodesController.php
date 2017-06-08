@@ -10,9 +10,9 @@ class VRLanguageCodesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function adminIndex()
 	{
-		//
+		return view('admin.adminList');
 	}
 
 	/**
