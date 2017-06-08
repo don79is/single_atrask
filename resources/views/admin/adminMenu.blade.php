@@ -3,8 +3,8 @@
 <ul>
 
     <li><a href="{{route('app.language.index')}}">{{trans('app.language')}}</a></li>
-    <li><a href="{{route('app.order.index')}}">{{trans('app.orders')}}</li>
-    <li><a href="{{route('app.pages.index')}}">{{trans('app.pages')}}</li>
+    <li><a href="{{route('app.order.index')}}">{{trans('app.orders')}}</a></li>
+    <li><a href="{{route('app.pages.index')}}">{{trans('app.pages')}}</a></li>
 
 </ul>
 

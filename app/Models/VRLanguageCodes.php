@@ -19,4 +19,6 @@ class VRLanguageCodes extends Model
     protected $fillable = ['id','language_code'];
 
     protected $updated_at = false;
+
+    public $incrementing = false;
 }

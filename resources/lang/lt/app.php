@@ -5,5 +5,6 @@ return [
     "language" => "Kalba",
     "orders" => "Užsakymai",
     "pages" => "Puslapiai",
-    "translations" => "Vertimai"
+    "translations" => "Vertimai",
+    "no-data" => "Nėra duomenų"
 ];
