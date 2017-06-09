@@ -19,11 +19,11 @@
 
                             @if ($key == 'is_active')
                                 <td> @if($value ==1)
-                                <button style="display: none" type="button" class="btn btn-success" onclick="enableDisablelanguage({{route('app.language.edit',$item['id']),0}})">{{trans('app.success')}}</button>
-                                <button type="button" class="btn btn-danger" onclick="enableDisablelanguage ({{route('app.language.edit',$item['id']),1}})">Danger</button>
+                                <button style="display: none" type="button" class="btn btn-success" onclick="toggleActive({{route('app.language.edit',$item['id']),0}})">{{trans('app.success')}}</button>
+                                <button type="button" class="btn btn-danger" onclick="toggleActive ({{route('app.language.edit',$item['id']),1}})">Danger</button>
                             @else
-                                <button style="display: none" type="button" class="btn btn-danger" onclick="enableDisablelanguage ({{route('app.language.edit',$item['id']),1}})">Danger</button>
-                                <button type="button" class="btn btn-success" onclick="enableDisablelanguage ({{route('app.language.edit',$item['id']),0}})">{{trans('app.success')}}</button>
+                                <button style="display: none" type="button" class="btn btn-danger" onclick="toggleActive ({{route('app.language.edit',$item['id']),1}})">Danger</button>
+                                <button type="button" class="btn btn-success" onclick="toggleActive ({{route('app.language.edit',$item['id']),0}})">{{trans('app.success')}}</button>
                                 </td>
                                 @endif
 
@@ -44,7 +44,7 @@
 
 @section('scripts')
     <script>
-function enableDisablelanguage(url, valur)
+function toggleActive(url, valur)
 {
 alert('Hello')
 }
