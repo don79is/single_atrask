@@ -8,4 +8,5 @@ return [
     "translations" => "Vertimai",
     "no-data" => "Nėra duomenų",
     "success" => "Aktyvus",
+    "danger" => "Išjungtas"
 ];

@@ -20,16 +20,16 @@
                             @if ($key == 'is_active')
                                 <td> @if($value ==1)
                                         <button style="display: none" type="button" class="btn btn-success"
-                                                onclick="toggleActive('{{route($call,$item['id'])}}',0)">{{trans('app.success')}}</button>
+                                                onclick="toggleActive('{{route($call,$item['id'])}}',1)">{{trans('app.success')}}</button>
                                         <button type="button" class="btn btn-danger"
-                                                onclick="toggleActive ('{{route($call,$item['id'])}}',1)">Danger
+                                                onclick="toggleActive ('{{route($call,$item['id'])}}',0)">{{trans('app.danger')}}
                                         </button>
                                     @else
                                         <button style="display: none" type="button" class="btn btn-danger"
-                                                onclick="toggleActive ('{{route($call,$item['id'])}}',1)">Danger
+                                                onclick="toggleActive ('{{route($call,$item['id'])}}',0)">{{trans('app.danger')}}
                                         </button>
                                         <button type="button" class="btn btn-success"
-                                                onclick="toggleActive ('{{route($call,$item['id'])}}',0)">{{trans('app.success')}}</button>
+                                                onclick="toggleActive ('{{route($call,$item['id'])}}',1)">{{trans('app.success')}}</button>
                                 </td>
                             @endif
 
@@ -55,9 +55,18 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         function toggleActive(url, value) {
-            console.log(url, value);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {is_active: value},
+                success: function (r) {
+                    console.log(r);
+                }
+            })
+
+
         }
 
     </script>

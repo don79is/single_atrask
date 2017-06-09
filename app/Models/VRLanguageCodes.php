@@ -16,9 +16,9 @@ class VRLanguageCodes extends Model
      * Fields which will be manipulated
      * @var array
      */
-    protected $fillable = ['id','language_code'];
+    protected $fillable = ['id','language_code','name','is_active'];
 
-    protected $updated_at = false;
+    public $timestamps= false;
 
     public $incrementing = false;
 }
