@@ -12,9 +12,9 @@
 
                     @endforeach
                 </tr>
-                <tr>
-                    @foreach( $list as $item )
 
+                @foreach( $list as $item )
+                    <tr id="{{$item['id']}}">
                         @foreach( $item as $key => $value)
 
                             @if ($key == 'is_active')
@@ -37,7 +37,8 @@
                                 <td>  {{$value}}</td>
                             @endif
                         @endforeach
-                </tr>
+                    </tr>
+
                 @endforeach
 
             </table>
@@ -55,18 +56,34 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         function toggleActive(url, value) {
 
-            $.ajax({
+            $.ajax
+            ({
                 url: url,
                 type: 'POST',
                 data: {is_active: value},
-                success: function (r) {
-                    console.log(r);
+                success: function (response) {
+                    var $danger = ($('#' + response.id).find('.btn-danger'));
+                    var $success = ($('#' + response.id).find('.btn-success'));
+//                    console.log( $disable, $anable)
+
+                    console.log($danger, $success);
+
+                    if(response.is_active === '1'){
+                        $success.hide();
+                        $danger.show()
+                    }
+                    else
+                    {
+                        $success.show();
+                        $danger.hide()
+                    }
+
+
                 }
             })
-
-
         }
 
     </script>
