@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRCategories;
 use Illuminate\Routing\Controller;
 
 class VRCategoriesController extends Controller {
@@ -10,9 +11,13 @@ class VRCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function adminIndex()
 	{
-		//
+        $conf ['list'] = VRCategories::get()->toArray();
+        $conf ['new'] = route('app.categories.create');
+        $conf ['title'] =trans('app.categories');
+
+        return view('admin.adminList', $conf);
 	}
 
 	/**
@@ -21,9 +26,11 @@ class VRCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function adminCreate()
 	{
-		//
+        $conf ['list'] = VRCategories::get()->toArray();
+        $conf ['title'] =trans('app.categories');
+        return view('admin.adminList', $conf);
 	}
 
 	/**
@@ -84,5 +91,14 @@ class VRCategoriesController extends Controller {
 	{
 		//
 	}
+
+    public function getFormData()
+    {
+        $configuration = [];
+        $configuration ['list'] = VRCategories::get()->toArray();
+        $configuration ['create'] = 'app.categories.create';
+        $configuration ['edit'] = 'app.categories.edit';
+        return $configuration;
+    }
 
 }

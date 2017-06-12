@@ -16,5 +16,5 @@ class VRMenuTranslations extends CoreModel
      * Fields which will be manipulated
      * @var array
      */
-    protected $fillable = ['id','url','name','menu_id','language_code'];
+    protected $fillable = ['id','url','name','record_id','language_code'];
 }

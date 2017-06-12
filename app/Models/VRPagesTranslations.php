@@ -16,5 +16,5 @@ class VRPagesTranslations extends CoreModel
      * Fields which will be manipulated
      * @var array
      */
-    protected $fillable = ['id','page_id','language_code','title','description_short','	description_long','slug'];
+    protected $fillable = ['id','record_id','language_code','title','description_short','description_long','slug'];
 }

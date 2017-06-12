@@ -16,5 +16,5 @@ class VRCategoriesTranslations extends CoreModel
      * Fields which will be manipulated
      * @var array
      */
-    protected $fillable = ['id', 'language_code', 'name', 'category_id'];
+    protected $fillable = ['id', 'language_code', 'name', 'record_id'];
 }

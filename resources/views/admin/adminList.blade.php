@@ -1,7 +1,15 @@
 @extends('admin.adminCore')
 
 @section('content')
+
     <div id="list">
+
+        {{$title}}<br>
+        @if(isset($new))
+            <a href="{{$new}}" class="btn btn-primary" role="button">
+                {{trans('app.new')}}</a>
+            <hr/>
+        @endif
         @if(sizeof($list)>0)
 
             <table class="table table-hover">
@@ -71,7 +79,7 @@
 
                     console.log($danger, $success);
 
-                    if(response.is_active === '1') {
+                    if (response.is_active === '1') {
                         $success.hide();
                         $danger.show()
                     }
