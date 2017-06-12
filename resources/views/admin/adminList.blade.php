@@ -71,12 +71,11 @@
 
                     console.log($danger, $success);
 
-                    if(response.is_active === '1'){
+                    if(response.is_active === '1') {
                         $success.hide();
                         $danger.show()
                     }
-                    else
-                    {
+                    else {
                         $success.show();
                         $danger.hide()
                     }
