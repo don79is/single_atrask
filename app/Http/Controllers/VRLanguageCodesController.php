@@ -17,6 +17,7 @@ class VRLanguageCodesController extends Controller
         $conf ['list'] = VRLanguageCodes::get()->toArray();
         $conf ['call'] = 'app.language.edit';
         $conf ['title'] = trans('app.language');
+
         return view('admin.adminList', $conf);
     }
 
@@ -28,22 +29,9 @@ class VRLanguageCodesController extends Controller
      */
     public function adminCreate()
     {
-        $conf ['title'] = trans('app.language');
 
-
-        $conf ['fields'] [] =
-            [
-                "type" => "dd",
-                "key" => "language_code",
-                "options" => getActiveLanguages()
-            ];
-        $conf ['fields'] [] =
-            [
-                "type" => "sl",
-                "key" => "name",
-            ];
-        return view('admin.adminForm', $conf);
     }
+
 
     /**
      * Store a newly created resource in storage.

@@ -28,9 +28,11 @@ class VRCategoriesController extends Controller {
 	 */
 	public function adminCreate()
 	{
-        $conf ['list'] = VRCategories::get()->toArray();
-        $conf ['title'] =trans('app.categories');
-        return view('admin.adminList', $conf);
+        $conf = $this->getFormData();
+        $conf['title'] = trans('app.categories');
+        $conf['new'] = route('app.categories.create');
+
+        return view('admin.adminForm', $conf);
 	}
 
 	/**
@@ -94,11 +96,15 @@ class VRCategoriesController extends Controller {
 
     public function getFormData()
     {
-        $configuration = [];
-        $configuration ['list'] = VRCategories::get()->toArray();
-        $configuration ['create'] = 'app.categories.create';
-        $configuration ['edit'] = 'app.categories.edit';
-        return $configuration;
+        $conf['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'language_code',
+            'options' => getActiveLanguages()
+        ];
+        $conf['fields'][] = [
+            'type' => 'singleline',
+            'key' => 'name',
+        ];
+        return $conf;
     }
-
 }

@@ -2,21 +2,21 @@
 
 @section('form')
 
-    <div class="container">
+    <div id="list">
+<div id="title">
         {{$title}}
-        {!!Form::open(['url' => route('app.language.create'),'files' => true]) !!}
+</div>
+        {!! Form::open(['url' => $new, 'files' => true]) !!}
         @foreach( $fields as $field)
 
-            @if($field['type'] == 'dd')
-                {{Form::label('languages', 'Kalbos')}}
-                {{ Form::select('language',$field['options'])}}
+            @if($field['type'] == 'dropdown')
 
-                @elseif( $field['type'] == 'sl')
-                {{Form::label('languages', 'Kalba')}}
-                {{ Form::text('language',$field['name'])}}
+                {!! Form::label($field['key'], trans('app.' . $field['key'])) !!}<br/>
+                {{Form::select($field['key'], $field['options'])}}<br/>
 
-
-
+                @elseif( $field['type'] == 'singleline')
+                {!! Form::label($field['key'], trans('app.' . $field['key'])) !!}<br/>
+                {{Form::text($field['key'])}}<br/>
 
             @endif
         @endforeach

@@ -10,5 +10,9 @@ return [
     "success" => "Aktyvus",
     "danger" => "Išjungtas",
     "categories" => "Kategorijos",
-    "new" => "Kurti naują"
+    "new" => "Kurti naują",
+    "name" => "Pavadinimas",
+    "language_code" => "Kalbos",
+    "menu" => "Meniu"
+
 ];
