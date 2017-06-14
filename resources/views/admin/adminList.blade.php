@@ -17,8 +17,13 @@
                     @foreach( $list[0] as $key => $value)
 
                         <th>{{$key}}</th>
-
                     @endforeach
+                    @if(isset($edit))
+                        <th> {{ trans('app.edit') }}</th>
+                    @endif
+                    @if(isset($delete))
+                        <th> {{ trans('app.delete') }}</th>
+                    @endif
                 </tr>
 
                 @foreach( $list as $item )
@@ -38,15 +43,28 @@
                                         </button>
                                         <button type="button" class="btn btn-success"
                                                 onclick="toggleActive ('{{route($call,$item['id'])}}',1)">{{trans('app.success')}}</button>
-                                </td>
-                            @endif
 
+                                    @endif
+                                </td>
+                            @elseif($key == 'translation')
+                                <td>
+                                    {{ $value['name'] . ' ' . $value['language_code'] }}
+                                </td>
                             @else
                                 <td>  {{$value}}</td>
                             @endif
                         @endforeach
+                            @if(isset ($edit))
+                                <td><a class="btn btn-info"
+                                       href="{{ route($edit, $item['id']) }}">{{ trans('app.edit') }}</a></td>
+                            @endif
+                            @if(isset ($delete))
+                                <td>
+                                    <button class="btn btn-warning"
+                                            onclick="deleteItem('{{route( $delete, $item['id'])}}', 0)">{{ trans('app.delete') }}</button>
+                                </td>
+                            @endif
                     </tr>
-
                 @endforeach
 
             </table>
@@ -65,6 +83,20 @@
             }
         });
 
+        function deleteItem(route) {
+            $.ajax({
+                url: route,
+                type: 'DELETE',
+                data: {},
+                dataType: 'json',
+                success: function (response) {
+                    $('#' + response.id).remove();
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+        }
         function toggleActive(url, value) {
 
             $.ajax

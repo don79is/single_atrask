@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\VRCategories;
+use App\Models\VRCategoriesTranslations;
 use Illuminate\Routing\Controller;
 
 class VRCategoriesController extends Controller {
@@ -13,9 +14,13 @@ class VRCategoriesController extends Controller {
 	 */
 	public function adminIndex()
 	{
+        $conf ['title'] =trans('app.categories');
         $conf ['list'] = VRCategories::get()->toArray();
         $conf ['new'] = route('app.categories.create');
-        $conf ['title'] =trans('app.categories');
+        $conf ['create'] = 'app.categories.create';
+        $conf ['edit'] = 'app.categories.edit';
+        $conf ['delete'] = 'app.categories.delete';
+
 
         return view('admin.adminList', $conf);
 	}
@@ -31,6 +36,7 @@ class VRCategoriesController extends Controller {
         $conf = $this->getFormData();
         $conf['title'] = trans('app.categories');
         $conf['new'] = route('app.categories.create');
+        $conf['back'] = 'app.categories.index';
 
         return view('admin.adminForm', $conf);
 	}
@@ -41,9 +47,14 @@ class VRCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function adminStore()
 	{
-		//
+		$data = request()->all();
+		$record = VRCategories::create();
+		$data['record_id']= $record->id;
+		VRCategoriesTranslations::create($data);
+
+		return redirect()->route('app.categories.edit' , [$record->id]);
 	}
 
 	/**
@@ -65,9 +76,15 @@ class VRCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function adminEdit($id)
 	{
-		//
+        $record = VrCategories::find($id)->toArray();
+//        dd($record);
+        $conf = $this->getFormData();
+        $conf['title'] = $id;
+        $conf['new'] = route('app.categories.create', $id);
+        $conf['back'] = 'app.categories.index';
+        return view('admin.adminForm', $conf);
 	}
 
 	/**
@@ -89,9 +106,12 @@ class VRCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function adminDestroy($id)
 	{
-		//
+        VRCategoriesTranslations::destroy(VRCategoriesTranslations::where('record_id', $id)->pluck('id')->toArray());
+        VRCategories::destroy($id);
+
+        return ["success" => true, "id" => $id];
 	}
 
     public function getFormData()

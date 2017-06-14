@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRMenu;
+use App\Models\VRMenuTranslations;
 use Illuminate\Routing\Controller;
 
 class VRMenuController extends Controller
@@ -13,7 +15,11 @@ class VRMenuController extends Controller
      */
     public function adminIndex()
     {
-        //
+        $conf ['list'] = VRMenu::get()->toArray();
+        $conf ['new'] = route('app.menu.create');
+        $conf ['title'] = trans('app.menu');
+
+        return view('admin.adminList', $conf);
     }
 
     /**
@@ -22,9 +28,13 @@ class VRMenuController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function adminCreate()
     {
-        //
+        $conf = $this->getFormData();
+        $conf['title'] = trans('app.menu');
+        $conf['new'] = route('app.menu.create');
+        $conf['back'] = 'app.menu.index';
+        return view('admin.adminForm', $conf);
     }
 
     /**
@@ -33,9 +43,14 @@ class VRMenuController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function adminStore()
     {
-        //
+        $data = request()->all();
+        $record = VRMenu::create($data);
+        $data['record_id']= $record->id;
+        VRMenuTranslations::create($data);
+
+        return redirect()->route('app.menu.edit' , [$record->id]);
     }
 
     /**
@@ -57,9 +72,15 @@ class VRMenuController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public function adminEdit($id)
     {
-        //
+        $record = VRMenu::find($id)->toArray();
+//        dd($record);
+        $conf = $this->getFormData();
+        $conf['title'] = $id;
+        $conf['new'] = route('app.menu.create', $id);
+        $conf['back'] = 'app.menu.index';
+        return view('admin.adminForm', $conf);
     }
 
     /**
@@ -97,20 +118,30 @@ class VRMenuController extends Controller
             'type' => 'singleline',
             'key' => 'name',
         ];
+
         $conf['fields'][] = [
             'type' => 'singleline',
             'key' => 'url',
         ];
         $conf['fields'][] = [
             'type' => 'singleline',
-            'key' => 'url',
+            'key' => 'sequence',
         ];
+
         $conf['fields'][] = [
             'type' => 'checkbox',
             'key' => 'new_window',
-            'options' => [
-                'value' => 'label'
-            ]
+            'options' =>
+                [
+
+                    [
+                        'name' => 'new_window',
+                        'value' => 1,
+                        'title' => trans('app.new-window'),
+                    ],
+
+
+                ]
         ];
         return $conf;
     }

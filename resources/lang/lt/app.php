@@ -13,6 +13,15 @@ return [
     "new" => "Kurti naują",
     "name" => "Pavadinimas",
     "language_code" => "Kalbos",
-    "menu" => "Meniu"
+    "menu" => "Meniu",
+    "submit" => "Sukurti",
+    "delete" => "Ištrinti",
+    "edit" => "Taisyti",
+    "url" => "URL",
+    "title" => "Atrask VR",
+    "new-window" => "Naujas langas",
+    "sequence" => "Eiliškumas",
+    "back" => "Atgal",
+
 
 ];
