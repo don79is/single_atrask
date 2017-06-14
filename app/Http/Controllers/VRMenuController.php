@@ -129,6 +129,12 @@ class VRMenuController extends Controller
         ];
 
         $conf['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'vr_parent_id',
+            'options' => VRMenuTranslations::get()->pluck('name','record_id')
+        ];
+
+        $conf['fields'][] = [
             'type' => 'checkbox',
             'key' => 'new_window',
             'options' =>
