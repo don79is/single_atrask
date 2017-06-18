@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', 'single_atraskvr'),
+    'domain' => env('SESSION_DOMAIN', 'vr2.dev'),
 
     /*
     |--------------------------------------------------------------------------
