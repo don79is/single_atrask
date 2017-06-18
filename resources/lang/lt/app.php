@@ -19,9 +19,16 @@ return [
     "edit" => "Taisyti",
     "url" => "URL",
     "title" => "Atrask VR",
-    "new-window" => "Naujas langas",
+    "yes" => "Taip",
     "sequence" => "Eiliškumas",
     "back" => "Atgal",
+    "users" => "Vartotojai",
+    "vr_parent_id" => "Tėvinio elemento ID",
+    'email' => 'Elektroninio pašto adresas',
+    'password' => 'Slaptažodis',
+    'phone' => 'Telefono numeris',
+    'role_id' => 'Rolė',
+    "new-window" => "Atidaryti naujame lage"
 
 
 ];
