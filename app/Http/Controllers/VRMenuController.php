@@ -18,6 +18,9 @@ class VRMenuController extends Controller
         $conf ['list'] = VRMenu::get()->toArray();
         $conf ['new'] = route('app.menu.create');
         $conf ['title'] = trans('app.menu');
+        $conf['create'] = 'app.menu.create';
+        $conf['edit'] = 'app.menu.edit';
+        $conf['delete'] = 'app.menu.delete';
 
         return view('admin.adminList', $conf);
     }
@@ -47,10 +50,10 @@ class VRMenuController extends Controller
     {
         $data = request()->all();
         $record = VRMenu::create($data);
-        $data['record_id']= $record->id;
+        $data['record_id'] = $record->id;
         VRMenuTranslations::create($data);
 
-        return redirect()->route('app.menu.edit' , [$record->id]);
+        return redirect()->route('app.menu.edit', [$record->id]);
     }
 
     /**
@@ -75,7 +78,10 @@ class VRMenuController extends Controller
     public function adminEdit($id)
     {
         $record = VRMenu::find($id)->toArray();
-//        dd($record);
+        $record['url'] = $record['translation']['url'];
+        $record['name'] = $record['translation']['name'];
+        $record['language_code'] = $record['translation']['language_code'];
+//
         $conf = $this->getFormData();
         $conf['title'] = $id;
         $conf['new'] = route('app.menu.create', $id);
@@ -128,22 +134,26 @@ class VRMenuController extends Controller
             'key' => 'sequence',
         ];
 
-        $conf['fields'][] = [
+        $language = request('language_code');
+        if ($language == null) {
+            $language = app()->getLocale();
+        }
+        $config['fields'][] = [
             'type' => 'dropdown',
             'key' => 'vr_parent_id',
-            'options' => VRMenuTranslations::get()->pluck('name','record_id')
-        ];
+            'options' => VRMenuTranslations::where('language_code', '=', $language)->pluck('name', 'record_id')
+          ];
 
         $conf['fields'][] = [
             'type' => 'checkbox',
-            'key' => 'new_window',
+            'key' => 'new-window',
             'options' =>
                 [
 
                     [
                         'name' => 'new_window',
                         'value' => 1,
-                        'title' => trans('app.new-window'),
+                        'title' => trans('app.yes'),
                     ],
 
 

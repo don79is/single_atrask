@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VROrder;
+use App\Models\VRUsers;
 use Illuminate\Routing\Controller;
 
 class VROrderController extends Controller {
@@ -10,10 +12,18 @@ class VROrderController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function adminindex()
-	{
-		return view('admin.adminList');
-	}
+    public function adminIndex()
+    {
+        $conf['title'] = trans('app.orders');
+        $conf['list'] = VROrder::get()->toArray();
+
+        $conf['new'] = route('app.order.create');
+        $conf['edit'] = 'app.order.edit';
+        $conf['delete'] = 'app.order.delete';
+
+
+        return view('admin.adminList', $conf);
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -21,10 +31,14 @@ class VROrderController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
-	}
+    public function adminCreate()
+    {
+        $conf = $this->getFormData();
+        $conf['title'] = trans('app.orders');
+        $conf['new'] = route('app.order.create');
+        $conf['back'] = 'app.order.index';
+        return view('admin.adminForm', $conf);
+    }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -84,5 +98,33 @@ class VROrderController extends Controller {
 	{
 		//
 	}
+    public function getFormData()
+    {
+        $config['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'status',
+            'options' => [
+                'pending' => 'pending',
+                'canceled' => 'canceled',
+                'approved' => 'approved'
+            ]
+        ];
+//                    [
+//                        'name' => 'pending',
+//                        'value' => 'pending'
+//                    ],                    [
+//                        'name' => 'canceled',
+//                        'value' => 'canceled',
+//                    ],                    [
+//                        'name' => 'approved',
+//                        'value' => 'approved',
+//                    ]
+        $config['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'user_id',
+            'options' => VRUsers::where('id', '=', 'user_id')->pluck('name', 'id'),
+        ];
+        return $config;
+    }
 
 }

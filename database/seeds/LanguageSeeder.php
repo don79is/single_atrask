@@ -13,11 +13,11 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         $languages = [
-            ["name" => "Lietuvių", "id" => "LT","language_code" => "LT"],
-            ["name" => "English", "id" => "EN","language_code" => "EN"],
-            ["name" => "Русский", "id" => "RU","language_code" => "RU"],
-            ["name" => "Deutsch", "id" => "DE","language_code" => "DE"],
-            ["name" => "Francais", "id" => "FR","language_code" => "FR"],
+            ['id' => 'lt', 'language_code' => 'LT', 'name' => 'Lietuvių'],
+            ['id' => 'en', 'language_code' => 'EN', 'name' => 'English'],
+            ['id' => 'ru', 'language_code' => 'RU', 'name' => 'Русский'],
+            ['id' => 'de', 'language_code' => 'DE', 'name' => 'Deutsch'],
+            ['id' => 'fr', 'language_code' => 'FR', 'name' => 'Français'],
 
 
         ];
@@ -31,7 +31,7 @@ class LanguageSeeder extends Seeder
             }
         } catch (Exception $e) {
             DB::rollback();
-            echo 'Point of failure '. $e->getCode() . ' ' . $e->getMessage();
+            echo 'Point of failure ' . $e->getCode() . ' ' . $e->getMessage();
             throw new Exception($e);
         }
         DB::commit();

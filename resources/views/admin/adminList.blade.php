@@ -50,6 +50,11 @@
                                 <td>
                                     {{ $value['name'] . ' ' . $value['language_code'] }}
                                 </td>
+                            @elseif($key == 'role')
+
+                                <td>
+                                    {{ $value['role_id'] }}
+                                </td>
                             @else
                                 <td>  {{$value}}</td>
                             @endif

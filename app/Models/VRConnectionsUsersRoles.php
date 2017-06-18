@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VRConnectionsUsersRoles extends CoreModel
+class VRConnectionsUsersRoles extends Model
 {
     /**
      * Table name
@@ -17,4 +17,6 @@ class VRConnectionsUsersRoles extends CoreModel
      * @var array
      */
     protected $fillable = ['user_id','role_id'];
+
+    public $updated_at = false;
 }
