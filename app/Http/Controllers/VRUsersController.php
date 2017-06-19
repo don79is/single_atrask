@@ -116,9 +116,11 @@ class VRUsersController extends Controller
      * @return Response
      */
     public
-    function destroy($id)
+    function adminDestroy($id)
     {
-        //
+       VRConnectionsUsersRoles::where('user_id', $id)->delete();
+        VRUsers::destroy($id);
+        return json_encode(["success" => true, "id" => $id]);
     }
 
     public function getFormData()
