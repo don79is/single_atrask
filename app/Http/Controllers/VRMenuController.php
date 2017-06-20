@@ -142,7 +142,7 @@ class VRMenuController extends Controller
             'type' => 'dropdown',
             'key' => 'vr_parent_id',
             'options' => VRMenuTranslations::where('language_code', '=', $language)->pluck('name', 'record_id')
-          ];
+        ];
 
         $conf['fields'][] = [
             'type' => 'checkbox',

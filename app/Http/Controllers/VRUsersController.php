@@ -86,7 +86,9 @@ class VRUsersController extends Controller
     function adminEdit($id)
     {
         $record = VRUsers::find($id)->toArray();
+
         $record['role_id'] = $record['role']['role_id'];
+
         $conf = $this->getFormData();
         $conf['record'] = $record;
         $conf['title'] = trans('app.users');

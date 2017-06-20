@@ -56,10 +56,10 @@ class VRPagesController extends Controller
     public function adminStore()
     {
         $data = request()->all();
-//        dd($data);
+//       dd($data);
 
-dd($data);
-        $resources = request()->file('file');
+
+        $resources = request()->file('cover_id');
         $uploadController = new VRResourcesController();
         $record = $uploadController->upload($resources);
         $data['cover_id'] = $record->id;
@@ -68,7 +68,7 @@ dd($data);
         $data['slug'] = str_slug($data['title'], '-');
         VRPagesTranslations::create($data);
 
-        return redirect(route('app.pages.edit', $record->id));
+        return redirect(route('app.pages.index', $record->id));
 
     }
 
@@ -93,10 +93,19 @@ dd($data);
      * @param  int $id
      * @return Response
      */
-    public
-    function edit($id)
+    public function adminEdit($id)
     {
-        //
+        $record = VRPages::find($id)->toArray();
+
+
+        $conf = $this->getFormData();
+        $conf['record'] = $record;
+
+        $conf['title'] = $id;
+        $conf['new'] = route('app.pages.create', $id);
+        $conf['back'] = 'app.pages.index';
+
+        return view('admin.adminForm', $conf);
     }
 
     /**
