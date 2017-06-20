@@ -54,11 +54,11 @@
 
             @elseif($field['type'] == 'file')
 
-                @if(isset($record[$field['key']]))
-                    {{Form::file($field['key'], $record[$field['key']])}}<br/>
-                @else
-                    {{Form::file('file')}}<br/>
-                @endif
+                {{Form::file($field['key'])}}<br/>
+
+                {{--TODO show image--}}
+                {{--TODO show delete chekcbox--}}|
+
 
             @elseif($field['type'] == 'checkbox')
 
@@ -66,6 +66,7 @@
 
 
                     @if(isset($record[$field['key']]))
+
                         {{Form::checkbox($option['name'], $option['value'], $record[$field['key']])}}
                     @else
                         {{Form::checkbox($option['name'], $option['value'])}}
