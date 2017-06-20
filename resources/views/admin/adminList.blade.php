@@ -44,12 +44,16 @@
                                         <button type="button" class="btn btn-success"
                                                 onclick="toggleActive ('{{route($call,$item['id'])}}',1)">{{trans('app.success')}}</button>
 
-                                    @endif
-                                </td>
+                            @endif
                             @elseif($key == 'translation')
                                 <td>
-                                    {{ $value['title'] . ' ' . $value['language_code'] }}
+                                    @if(isset($value['name']))
+                                        {{ $value['name'] . ' ' . $value['language_code'] }}
+                                    @else
+                                        {{ $value['title'] . ' ' . $value['language_code'] }}
+                                    @endif
                                 </td>
+
                             @elseif($key == 'role')
 
                                 <td>
@@ -59,16 +63,16 @@
                                 <td>  {{$value}}</td>
                             @endif
                         @endforeach
-                            @if(isset ($edit))
-                                <td><a class="btn btn-info"
-                                       href="{{ route($edit, $item['id']) }}">{{ trans('app.edit') }}</a></td>
-                            @endif
-                            @if(isset ($delete))
-                                <td>
-                                    <button class="btn btn-warning"
-                                            onclick="deleteItem('{{route( $delete, $item['id'])}}', 0)">{{ trans('app.delete') }}</button>
-                                </td>
-                            @endif
+                        @if(isset ($edit))
+                            <td><a class="btn btn-info"
+                                   href="{{ route($edit, $item['id']) }}">{{ trans('app.edit') }}</a></td>
+                        @endif
+                        @if(isset ($delete))
+                            <td>
+                                <button class="btn btn-warning"
+                                        onclick="deleteItem('{{route( $delete, $item['id'])}}', 0)">{{ trans('app.delete') }}</button>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
 

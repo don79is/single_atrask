@@ -57,42 +57,21 @@ class VRPagesController extends Controller
     {
         $data = request()->all();
 //        dd($data);
-        $vr_resource = request()->file('file');
 
-        $resource = $this->uploadFile($vr_resource);
+dd($data);
+        $resources = request()->file('file');
+        $uploadController = new VRResourcesController();
+        $record = $uploadController->upload($resources);
+        $data['cover_id'] = $record->id;
+        $record = VRPages::create($data);
+        $data['record_id'] = $record->id;
+        $data['slug'] = str_slug($data['title'], '-');
+        VRPagesTranslations::create($data);
 
-        $record = VRPages::create(array(
-            'category_id' => $data['category_id'],
-            'cover_id' => $resource->id
-        ));
-
-        VRPagesTranslations::create(array(
-            'record_id' => $record->id,
-            'language_code' => $data['language_code'],
-            'title' => $data['title'],
-            'description_short' => $data['description_short'],
-            'description_long' => $data['description_long'],
-            'slug' => $data['slug']
-
-        ));
-
-        return redirect('/admin/pages/')->with('message', 'Puslapis sėkmingai sukurtas!');
+        return redirect(route('app.pages.edit', $record->id));
 
     }
 
-    public function uploadFile(UploadedFile $file)
-    {
-        $data =
-            [
-                "size" => $file->getsize(),
-                "mime_type" => $file->getMimetype(),
-            ];
-        $path = 'upload/' . date("Y/m/d/". '/');
-        $fileName = Carbon::now()->timestamp . '-' . $file->getClientOriginalName();
-        $file->move(public_path($path), $fileName);
-        $data["path"] = $path . $fileName;
-        return VRResources::create($data);
-    }
 
     /**
      * Display the specified resource.
