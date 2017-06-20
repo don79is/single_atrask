@@ -48,7 +48,7 @@
                                 </td>
                             @elseif($key == 'translation')
                                 <td>
-                                    {{ $value['name'] . ' ' . $value['language_code'] }}
+                                    {{ $value['title'] . ' ' . $value['language_code'] }}
                                 </td>
                             @elseif($key == 'role')
 

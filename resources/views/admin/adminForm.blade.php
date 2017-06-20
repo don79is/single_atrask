@@ -44,6 +44,21 @@
                     {{Form::text($field['key'])}}<br/>
                 @endif
 
+            @elseif($field['type'] == 'textarea')
+
+                @if(isset($record[$field['key']]))
+                    {{Form::textarea($field['key'], $record[$field['key']])}}<br/>
+                @else
+                    {{Form::textarea($field['key'])}}<br/>
+                @endif
+
+            @elseif($field['type'] == 'file')
+
+                @if(isset($record[$field['key']]))
+                    {{Form::file($field['key'], $record[$field['key']])}}<br/>
+                @else
+                    {{Form::file('file')}}<br/>
+                @endif
 
             @elseif($field['type'] == 'checkbox')
 

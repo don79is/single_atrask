@@ -1,6 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRCategoriesTranslations;
 use App\Models\VRPages;
+use App\Models\VRPagesTranslations;
+use App\Models\VRResources;
+use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
 
 class VRPagesController extends Controller
@@ -17,10 +22,12 @@ class VRPagesController extends Controller
         {
             $conf['list'] = VRPages::get()->toArray();
             $conf['title'] = trans('app.pages');
-            $conf['route'] = route('app.pages.create');
+            $conf['new'] = route('app.pages.create');
 
+            $conf['create'] = 'app.pages.create';
             $conf['edit'] = 'app.pages.edit';
             $conf['delete'] = 'app.pages.delete';
+
             return view('admin.adminList', $conf);
         }
     }
@@ -31,9 +38,13 @@ class VRPagesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function adminCreate()
     {
-        //
+        $conf = $this->getFormData();
+        $conf['title'] = trans('app.pages');
+        $conf['new'] = route('app.pages.create');
+        $conf['back'] = 'app.pages.index';
+        return view('admin.adminForm', $conf);
     }
 
     /**
@@ -42,9 +53,45 @@ class VRPagesController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function adminStore()
     {
-        //
+        $data = request()->all();
+//        dd($data);
+        $vr_resource = request()->file('file');
+
+        $resource = $this->uploadFile($vr_resource);
+
+        $record = VRPages::create(array(
+            'category_id' => $data['category_id'],
+            'cover_id' => $resource->id
+        ));
+
+        VRPagesTranslations::create(array(
+            'record_id' => $record->id,
+            'language_code' => $data['language_code'],
+            'title' => $data['title'],
+            'description_short' => $data['description_short'],
+            'description_long' => $data['description_long'],
+            'slug' => $data['slug']
+
+        ));
+
+        return redirect('/admin/pages/')->with('message', 'Puslapis sėkmingai sukurtas!');
+
+    }
+
+    public function uploadFile(UploadedFile $file)
+    {
+        $data =
+            [
+                "size" => $file->getsize(),
+                "mime_type" => $file->getMimetype(),
+            ];
+        $path = 'upload/' . date("Y/m/d/". '/');
+        $fileName = Carbon::now()->timestamp . '-' . $file->getClientOriginalName();
+        $file->move(public_path($path), $fileName);
+        $data["path"] = $path . $fileName;
+        return VRResources::create($data);
     }
 
     /**
@@ -54,7 +101,8 @@ class VRPagesController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -66,7 +114,8 @@ class VRPagesController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -78,7 +127,8 @@ class VRPagesController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public
+    function update($id)
     {
         //
     }
@@ -90,9 +140,58 @@ class VRPagesController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }
 
+    public
+    function getFormData()
+    {
+        $language = request('language_code');
+        if ($language == null) {
+            $language = app()->getLocale();
+
+        $conf['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'language_code',
+            'options' => getActiveLanguages()
+        ];
+
+
+
+            $conf['fields'][] = [
+                'type' => 'dropdown',
+                'key' => 'category_id',
+                "options" => VRCategoriesTranslations::where('language_code', $language)->pluck('name', 'record_id')
+            ];
+
+            $conf['fields'][] = [
+                'type' => 'singleline',
+                'key' => 'title',
+            ];
+
+            $conf['fields'][] = [
+                'type' => 'textarea',
+                'key' => 'description_short',
+            ];
+            $conf['fields'][] = [
+                'type' => 'textarea',
+                'key' => 'description_long',
+            ];
+            $conf['fields'][] = [
+                'type' => 'singleline',
+                'key' => 'slug',
+            ];
+            $conf['fields'][] = [
+                "type" => "file",
+                "key" => "cover_id",
+                "file" => VRResources::pluck('path', 'id')->toArray()
+            ];
+
+
+            return $conf;
+        }
+    }
 }
