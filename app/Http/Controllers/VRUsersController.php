@@ -88,7 +88,7 @@ class VRUsersController extends Controller
         $record = VRUsers::find($id)->toArray();
 
         $record['role_id'] = $record['role']['role_id'];
-
+dd($record);
         $conf = $this->getFormData();
         $conf['record'] = $record;
         $conf['title'] = trans('app.users');

@@ -21,6 +21,7 @@ class VRPagesController extends Controller
     {
         {
             $conf['list'] = VRPages::get()->toArray();
+
             $conf['title'] = trans('app.pages');
             $conf['new'] = route('app.pages.create');
 
@@ -68,7 +69,7 @@ class VRPagesController extends Controller
         $data['slug'] = str_slug($data['title'], '-');
         VRPagesTranslations::create($data);
 
-        return redirect(route('app.pages.index', $record->id));
+        return redirect(route('app.pages.edit', $record->id));
 
     }
 
@@ -96,11 +97,15 @@ class VRPagesController extends Controller
     public function adminEdit($id)
     {
         $record = VRPages::find($id)->toArray();
+        $record['title'] = $record['translation']['title'];
+        $record['description_short'] = $record['translation']['description_short'];
+        $record['description_long'] = $record['translation']['description_long'];
+        $record['slug'] = $record['translation']['slug'];
+        $record['image'] = $record['image']['path'];
 
 
         $conf = $this->getFormData();
         $conf['record'] = $record;
-
         $conf['title'] = $id;
         $conf['new'] = route('app.pages.create', $id);
         $conf['back'] = 'app.pages.index';
@@ -141,12 +146,11 @@ class VRPagesController extends Controller
         if ($language == null) {
             $language = app()->getLocale();
 
-        $conf['fields'][] = [
-            'type' => 'dropdown',
-            'key' => 'language_code',
-            'options' => getActiveLanguages()
-        ];
-
+            $conf['fields'][] = [
+                'type' => 'dropdown',
+                'key' => 'language_code',
+                'options' => getActiveLanguages()
+            ];
 
 
             $conf['fields'][] = [
@@ -174,11 +178,13 @@ class VRPagesController extends Controller
             ];
             $conf['fields'][] = [
                 "type" => "file",
-                "key" => "cover_id",
+                "key" => "image",
                 "file" => VRResources::pluck('path', 'id')->toArray()
             ];
-
-
+            $conf['fields'][] = [
+                "type" => "",
+                "key" => "image",
+            ];
             return $conf;
         }
     }

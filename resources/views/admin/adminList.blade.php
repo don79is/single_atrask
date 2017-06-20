@@ -43,7 +43,7 @@
                                         </button>
                                         <button type="button" class="btn btn-success"
                                                 onclick="toggleActive ('{{route($call,$item['id'])}}',1)">{{trans('app.success')}}</button>
-
+                                </td>
                             @endif
                             @elseif($key == 'translation')
                                 <td>
@@ -54,6 +54,16 @@
                                     @endif
                                 </td>
 
+                            @elseif($key == 'image')
+
+                                    @if(isset($value['path']))
+                                        <td>
+                                        <img src="{{asset ($value['path']) }}" class="image-size" >
+
+                                        </td>
+                                        @else
+                                        No image
+                                    @endif
                             @elseif($key == 'role')
 
                                 <td>
@@ -73,6 +83,7 @@
                                         onclick="deleteItem('{{route( $delete, $item['id'])}}', 0)">{{ trans('app.delete') }}</button>
                             </td>
                         @endif
+
                     </tr>
                 @endforeach
 
