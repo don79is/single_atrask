@@ -37,6 +37,7 @@ class VRMenuController extends Controller
         $conf['title'] = trans('app.menu');
         $conf['new'] = route('app.menu.create');
         $conf['back'] = 'app.menu.index';
+
         return view('admin.adminForm', $conf);
     }
 
