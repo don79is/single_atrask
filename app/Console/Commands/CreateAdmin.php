@@ -52,6 +52,6 @@ class CreateAdmin extends Command
             'password' => bcrypt($password),
             'phone' => $phone,
         ]);
-        $record->roles()->sync('user');
+        $record->roles()->sync('super-admin');
     }
 }

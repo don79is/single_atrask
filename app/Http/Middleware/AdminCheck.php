@@ -16,9 +16,9 @@ class AdminCheck
     public function handle($request, Closure $next)
     {
         if (in_array('super-admin', auth()->user()->roles->pluck('id')->toArray()))
-        {
             return $next($request);
-        }
+
+
 
     }
 }
