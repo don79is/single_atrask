@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(VrRolesSeeder::class);
         $this->call(LanguageSeeder::class);
+        $this->call(VRRoomsSeeder::class);
     }
 }

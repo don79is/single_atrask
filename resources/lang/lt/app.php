@@ -28,7 +28,12 @@ return [
     'password' => 'Slaptažodis',
     'phone' => 'Telefono numeris',
     'role_id' => 'Rolė',
-    "new-window" => "Atidaryti naujame lage"
+    "new-window" => "Atidaryti naujame lage",
+    "slug" => "SLUG",
+    "image" => "Paveiksliukas",
+    "category_id" => "Kategorijos",
+
+
 
 
 ];
