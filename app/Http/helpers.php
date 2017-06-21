@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\VRLanguageCodes;
+use App\Models\VRMenu;
 
 function getActiveLanguages()
 {
@@ -17,5 +18,12 @@ function getActiveLanguages()
     $languages = [$locale => $languages[$locale]] + $languages;
 
     return $languages;
+
+}
+function getFrontEndMenu()
+{
+
+$conf = VRMenu::where('vr_parent_id',null)->get()->toArray();
+dd($conf);
 
 }
