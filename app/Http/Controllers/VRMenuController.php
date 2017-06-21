@@ -34,6 +34,7 @@ class VRMenuController extends Controller
     public function adminCreate()
     {
         $conf = $this->getFormData();
+
         $conf['title'] = trans('app.menu');
         $conf['new'] = route('app.menu.create');
         $conf['back'] = 'app.menu.index';
@@ -139,27 +140,25 @@ class VRMenuController extends Controller
         if ($language == null) {
             $language = app()->getLocale();
         }
-        $config['fields'][] = [
+        $conf['fields'][] = [
             'type' => 'dropdown',
             'key' => 'vr_parent_id',
             'options' => VRMenuTranslations::where('language_code', '=', $language)->pluck('name', 'record_id')
         ];
-
-        $conf['fields'][] = [
-            'type' => 'checkbox',
-            'key' => 'new-window',
-            'options' =>
-                [
-
+        $conf['fields'][] =
+            [
+                'type' => 'checkbox',
+                'key' => 'new-window',
+                'options' =>
                     [
-                        'name' => 'new_window',
-                        'value' => 1,
-                        'title' => trans('app.yes'),
-                    ],
+                        [
+                            'name' => 'new_window',
+                            'value' => 1,
+                            'title' => trans('app.yes'),
+                        ],
+                    ]
+            ];
 
-
-                ]
-        ];
         return $conf;
     }
 
