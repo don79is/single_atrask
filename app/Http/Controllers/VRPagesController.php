@@ -42,7 +42,7 @@ class VRPagesController extends Controller
     public function adminCreate()
     {
         $conf = $this->getFormData();
-        dd($conf);
+
         $conf['title'] = trans('app.pages');
         $conf['new'] = route('app.pages.create');
         $conf['back'] = 'app.pages.index';
