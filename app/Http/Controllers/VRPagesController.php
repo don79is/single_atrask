@@ -21,6 +21,7 @@ class VRPagesController extends Controller
     {
         {
             $conf['list'] = VRPages::get()->toArray();
+
             $conf['new'] = route('app.pages.create');
             $conf['title'] = trans('app.pages');
 
@@ -59,13 +60,16 @@ class VRPagesController extends Controller
     public function adminStore()
     {
         $data = request()->all();
-//       dd($data);
 
 
-        $resources = request()->file('cover_id');
+
+        $resources = request()->file('file');
+
         $uploadController = new VRResourcesController();
         $record = $uploadController->upload($resources);
+
         $data['cover_id'] = $record->id;
+
         $record = VRPages::create($data);
         $data['record_id'] = $record->id;
         $data['slug'] = str_slug($data['title'], '-');
@@ -182,6 +186,8 @@ class VRPagesController extends Controller
             "key" => "image",
             "file" => VRResources::pluck('path', 'id')->toArray()
         ];
+
+
 
         return $conf;
 

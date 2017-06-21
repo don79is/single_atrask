@@ -53,8 +53,14 @@
                 @endif
 
             @elseif($field['type'] == 'file')
+                @if(isset($record[$field['key']]))
+                    {{Form::file('file'),$record[$field['key']]}}
+                    <img src="{{asset ($record['path'])}}" class="image-size">
 
-                {{Form::file($field['key'])}}<br/>
+
+                @else
+                    {{Form::file('file')}}
+                @endif
 
                 {{--TODO show image--}}
                 {{--TODO show delete chekcbox--}}|
@@ -83,7 +89,7 @@
         <a class="btn btn-primary" href="{{route($back)}}">{{ trans('app.back') }}</a>
 
         <div style="padding-top: 20px">
-        {{ Form::submit(trans('app.submit')) }}
+            {{ Form::submit(trans('app.submit')) }}
         </div>
 
         {!! Form::close() !!}

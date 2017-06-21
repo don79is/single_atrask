@@ -32,6 +32,8 @@ return [
     "slug" => "SLUG",
     "image" => "Paveiksliukas",
     "category_id" => "Kategorijos",
+    "description_long" => "Ilgas aprašymas",
+    "description_short" => "Trumpas aprašymas",
 
 
 
