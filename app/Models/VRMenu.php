@@ -28,7 +28,7 @@ class VRMenu extends CoreModel
     }
     public function menu()
     {
-        return $this->hasMany()
+
     }
     protected $with = ['translation'];
 }

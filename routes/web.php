@@ -14,9 +14,9 @@ Route::group(['prefix' => 'menu'], function (){
     Route::get('/',['as' => 'app.menu.index','uses' => 'FrontEndController@index']);
     Route::get('/create', ['as' => 'app.menu.create', 'uses' => 'VRCategoriesController@adminCreate']);
 });
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 

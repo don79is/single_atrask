@@ -56,14 +56,15 @@
 
                             @elseif($key == 'image')
 
-                                    @if(isset($value['path']))
-                                        <td>
-                                        <img src="{{asset ($value['path']) }}" class="image-size" >
+                                @if(isset($value['path']))
+                                    <td>
+                                        <img src="{{asset ($value['path']) }}" class="image-size">
 
-                                        </td>
-                                        @else
-                                        No image
-                                    @endif
+                                    </td>
+                                @else
+                                    No image
+                                @endif
+
                             @elseif($key == 'role')
 
                                 <td>

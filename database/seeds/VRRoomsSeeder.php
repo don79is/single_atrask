@@ -48,5 +48,4 @@ class VRRoomsSeeder extends Seeder
             DB::commit();
         }
     }
-
 }

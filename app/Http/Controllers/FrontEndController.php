@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRMenu;
+use App\Models\VRPages;
 use Illuminate\Routing\Controller;
 
 class FrontEndController extends Controller {
@@ -12,7 +14,9 @@ class FrontEndController extends Controller {
 	 */
 	public function index()
 	{
-        return view('front-end.menu');
+$conf['list'] = VRMenu::get()->toArray();
+
+        return view('front-end.menu',$conf);
 	}
 
 	/**
