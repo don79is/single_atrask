@@ -1,3 +1,3 @@
-{{$menu}}
+{{dd($menu)}}
 
 labas

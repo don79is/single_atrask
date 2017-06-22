@@ -23,8 +23,7 @@ function getActiveLanguages()
 function getFrontEndMenu()
 {
 
-//$data = VRMenu::where('vr_parent_id',null)->get()->toArray();
-//
-//return [$data];
+
+return [$data];
 
 }

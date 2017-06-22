@@ -14,9 +14,8 @@ class FrontEndController extends Controller {
 	 */
 	public function index()
 	{
-$conf['list'] = VRMenu::get()->toArray();
 
-        return view('front-end.menu',$conf);
+        return view('front-end.menu');
 	}
 
 	/**

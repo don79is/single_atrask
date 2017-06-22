@@ -26,8 +26,10 @@ class VRMenu extends CoreModel
         }
         return $this->hasOne(VRMenuTranslations::class, 'record_id', 'id')->where('language_code', $language);
     }
-    public function menu()
+    public function children()
     {
+
+        return $this->hasMany( VRMenu:: class, 'vr_parent_id', 'id')->with('children');
 
     }
     protected $with = ['translation'];
