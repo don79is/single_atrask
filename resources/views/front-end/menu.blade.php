@@ -41,7 +41,8 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
                     @foreach( $rooms as $value)
-                        <a class="dropdown-item" href="#">{{$value['translation']['title']}} </a>
+
+                        <a class="dropdown-item" href="{{app()->getlocale().'/pages'}}">{{$value['translation']['title']}} </a>
                     @endforeach
                 </div>
 
