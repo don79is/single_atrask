@@ -16,13 +16,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require base_path( 'app/Http/helpers.php');
+        require base_path('app/Http/helpers.php');
 
         $admin = request()->segment(1);
 
-        if($admin != 'admin')
+        if ($admin != 'admin') {
 
-        View::share('menu', getFrontEndMenu());
+            View::share('menu', getFrontEndMenu());
+            View::share('lang', getActiveLanguages());
+            View::share('rooms',getRooms());
+        }
     }
 
     /**

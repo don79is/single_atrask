@@ -29,7 +29,7 @@ class VRMenu extends CoreModel
     public function children()
     {
 
-        return $this->hasMany( VRMenu:: class, 'vr_parent_id', 'id')->with('children');
+        return $this->hasMany( VRMenu:: class, 'vr_parent_id', 'id')->with('children')->orderByDesc('sequence');
 
     }
     protected $with = ['translation'];
