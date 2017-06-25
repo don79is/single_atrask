@@ -30,7 +30,7 @@ function getFrontEndMenu()
 }
 function getRooms()
 {
-    $rooms = VRPages::where('category_id','vr_rooms')->get()->toArray();
+    $rooms = VRPages::where('category_id','=','vr_rooms')->get()->toArray();
 
     return $rooms;
 }

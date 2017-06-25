@@ -10,14 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'menu'], function (){
-    Route::get('/',['as' => 'app.menu.index','uses' => 'FrontEndController@index']);
-    Route::get('/{lang}/pages/{slug}', ['as' => 'app.menu.show', 'uses' => 'FrontEndController@show']);
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', ['as' => 'app.user.index', 'uses' => 'FrontEndController@index']);
+    Route::get('/{lang}/pages/{slug}', ['as' => 'app.user.show', 'uses' => 'FrontEndController@pageShow']);
 
 });
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 

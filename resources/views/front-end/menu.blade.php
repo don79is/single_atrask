@@ -42,7 +42,7 @@
 
                     @foreach( $rooms as $value)
 
-                        <a class="dropdown-item" href="{{app()->getlocale().'/pages'}}">{{$value['translation']['title']}} </a>
+                        <a class="dropdown-item" href="{{app()->getlocale().'/pages/'. ($value['translation']['slug'])}}">{{$value['translation']['title']}} </a>
                     @endforeach
                 </div>
 

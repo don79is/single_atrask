@@ -49,14 +49,14 @@ class FrontEndController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show()
+    public function pageShow($lang, $slug)
     {
-        $conf = VRPagesTranslations::where('slug')->where('language_code')->first();
+        $data = VRPagesTranslations::where('slug', $slug)->where('language_code', $lang)->with('pages')->first()->toArray();
 
 
-return view('app.menu.show',$conf);
+        return view('front-end.pages', $data);
 
-	}
+    }
 
     /**
      * Show the form for editing the specified resource.
