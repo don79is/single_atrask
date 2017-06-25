@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="EN">
 <head>
-
+    @include('front-end.css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <title>{{trans('app.title')}}</title>
@@ -11,7 +11,7 @@
 <body>
 
 @include('front-end.menu')
-
+@yield('content')
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
