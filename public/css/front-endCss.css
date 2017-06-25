@@ -1,4 +1,29 @@
-html, body {
-    height: 100%;
-    background-color: #dff0d8;
+.navbar-nav{
+    background-color: yellow;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+#pages_title{
+    text-align: center;
+    padding: 75px 140px 5px 20px;
+    color: black;
+    font-size: 16px;
+}
+
+img {
+    vertical-align: middle;
+    margin: 50px 0px 45px 570px;
+}
+
+
+.h4, h4 {
+    font-size: 18px;
+    text-align: center;
 }

@@ -103,6 +103,7 @@ class VRPagesController extends Controller
     public function adminEdit($id)
     {
         $record = VRPages::find($id)->toArray();
+
         $record['title'] = $record['translation']['title'];
         $record['description_short'] = $record['translation']['description_short'];
         $record['description_long'] = $record['translation']['description_long'];

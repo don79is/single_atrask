@@ -1,6 +1,6 @@
 @extends('admin.adminCore')
 
-@section('content')
+@section('list')
 
     <div id="list">
 

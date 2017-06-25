@@ -17,4 +17,6 @@ class VROrder extends CoreModel
      * @var array
      */
     protected $fillable = ['id','status','user_id'];
+
+
 }
