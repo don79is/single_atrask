@@ -86,11 +86,15 @@
 
 
         @endforeach
-        <a class="btn btn-primary" href="{{route($back)}}">{{ trans('app.back') }}</a>
+
 
         <div style="padding-top: 20px">
             {{ Form::submit(trans('app.submit')) }}
         </div>
+<br>
+        <a class="btn btn-primary" href="{{route($back)}}">{{ trans('app.back') }}</a>
+
+
 
         {!! Form::close() !!}
     </div>
