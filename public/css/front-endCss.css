@@ -1,5 +1,5 @@
 .navbar-nav{
-    background-color: yellow;
+    background-color: gray;
     display: -webkit-flex;
     -webkit-justify-content: space-around;
     justify-content: space-around;
@@ -26,4 +26,8 @@ img {
 .h4, h4 {
     font-size: 18px;
     text-align: center;
+}
+a {
+    color: #FD7B52;
+    text-decoration: none;
 }
