@@ -160,7 +160,11 @@ class VROrderController extends Controller
         $conf['fields'][] = [
             'type' => 'dropdown',
             'key' => 'vr_rooms',
-            'options' => VRPages::where('category_id','vr_rooms')->join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->pluck('vr_pages_translations.title','vr_pages.id')->toArray(),
+            'options' => VRPages::
+            where('category_id','vr_rooms')->
+            join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->
+            pluck('vr_pages_translations.title','vr_pages.id')->
+            toArray(),
         ];
 
 
