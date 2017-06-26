@@ -32,6 +32,7 @@ class VRPages extends CoreModel
         return $this->hasOne(VRResources::class, 'id', 'cover_id');
     }
 
+
     protected $with = ['translation','image'];
 
 }

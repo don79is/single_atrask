@@ -1,7 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\VROrder;
+use App\Models\VRPages;
+use App\Models\VRPagesTranslations;
 use App\Models\VRUsers;
+use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 
 class VROrderController extends Controller
@@ -34,7 +37,11 @@ class VROrderController extends Controller
      */
     public function adminCreate()
     {
+
+
+//        dd(VRPages::where('category_id','vr_rooms')->join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->get()->toArray());
         $conf = $this->getFormData();
+
         $conf['title'] = trans('app.orders');
         $conf['new'] = route('app.order.create');
         $conf['back'] = 'app.order.index';
@@ -77,7 +84,7 @@ class VROrderController extends Controller
      */
     public function adminEdit($id)
     {
-        $record = VrOrder::find($id)->toArray();
+        $record = VROrder::find($id)->toArray();
         $record ['record'] = $record;
 
 
@@ -145,7 +152,37 @@ class VROrderController extends Controller
             'key' => 'user_id',
             'options' => VRUsers::pluck('email', 'id')->toArray(),
         ];
+
+        $language = request('language_code');
+        if ($language == null) {
+            $language = app()->getLocale();
+        }
+        $conf['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'vr_rooms',
+            'options' => VRPages::where('category_id','vr_rooms')->join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->pluck('vr_pages_translations.title','vr_pages.id')->toArray(),
+        ];
+
+
+        $conf['fields'][] = [
+            'type' => 'dropdown',
+            'key' => 'time',
+            'options' => $this->getData(),
+        ];
+
+
         return $conf;
+    }
+
+    public function getData()
+    {
+        $date = [];
+        for ($days = Carbon::createFromDate();
+             $days->lte(Carbon::createFromDate()->addDays(14));
+             $days->addDay()) {
+            $date[] = $days->format('Y-m-d');
+        }
+        return ($date);
     }
 
 }
