@@ -34,6 +34,8 @@ return [
     "category_id" => "Kategorijos",
     "description_long" => "Ilgas aprašymas",
     "description_short" => "Trumpas aprašymas",
+    "time" => "Laikas",
+    "vr_rooms" => "Patirčių kambariai",
 
 
 

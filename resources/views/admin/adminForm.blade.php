@@ -91,9 +91,8 @@
         <div style="padding-top: 20px">
             {{ Form::submit(trans('app.submit')) }}
         </div>
-<br>
+        <br>
         <a class="btn btn-primary" href="{{route($back)}}">{{ trans('app.back') }}</a>
-
 
 
         {!! Form::close() !!}
@@ -105,8 +104,22 @@
     <script>
         $('#language_code').bind("change", function () {
 //            console.log(window.location.href)
-            window.location.href = "?language_code=" + $('#language_code').val()
+                window.location.href = "?language_code=" + $('#language_code').val();
 //            alert($('#language_code').val())
-        })
+            }
+        )
+
+        var time = $('#time');
+        var vr_rooms = $('#vr_rooms');
+
+        if (time.length > 0 &&
+            (vr_rooms.length > 0)) {
+            vr_rooms.bind("change", getAvalebleHouers);
+            time.bind("change", getAvalebleHouers);
+        }
+        function getAvalebleHouers() {
+
+            console.log(vr_rooms.val() , time.val())
+        }
     </script>
 @endsection
