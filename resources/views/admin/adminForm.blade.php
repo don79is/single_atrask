@@ -15,7 +15,7 @@
 
                 @if(isset($record[$field['key']]))
 
-                    @if($field['key'] == 'language_code')
+                    @if($field['key'] == 'language_code'|| $field['key'] == 'time'|| $field['key'] == 'status' || $field['key'] == 'vr_rooms' ||  $field['key'] == 'user_id' )
 
                         {{Form::select($field['key'], $field['options'], $record[$field['key']])}}<br/>
 
@@ -25,7 +25,7 @@
                     @endif
 
                 @else
-                    @if($field['key'] == 'language_code')
+                    @if($field['key'] == 'language_code' || $field['key'] == 'time'|| $field['key'] == 'status' || $field['key'] == 'vr_rooms'||  $field['key'] == 'user_id')
 
                         {{Form::select($field['key'], $field['options'])}}<br/>
 
@@ -119,7 +119,28 @@
         }
         function getAvalebleHouers() {
 
-            console.log(vr_rooms.val() , time.val())
+            console.log(vr_rooms.val(), time.val())
+            $.ajax({
+                url: '{{route('app.order.reserved')}}',
+
+                type: 'GET',
+                data: {
+                    time: time.val(),
+                    experience_id: vr_rooms.val()
+                },
+
+                success: function (response) {
+                    console.log(response);
+                },
+
+                error: function () {
+                    alert('ERROR');
+                }
+
+            });
+
         }
+
+
     </script>
 @endsection
