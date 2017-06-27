@@ -3,6 +3,7 @@
 use App\Models\VROrder;
 use App\Models\VRPages;
 use App\Models\VRPagesTranslations;
+use App\Models\VRReservations;
 use App\Models\VRUsers;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
@@ -27,6 +28,24 @@ class VROrderController extends Controller
 
 
         return view('admin.adminList', $conf);
+    }
+    /**
+     * Show the form for creating a new resource.
+     * GET /vrorder/reserved
+     *
+     * @return Response
+     */
+    public function reserved ()
+    {
+        $data= request()->all();
+
+
+        $start = Carbon::parse('time',$data)->startOfDay();
+        $end = Carbon::parse('time',$data)->endOfDay();
+
+        $conf = VRReservations::where('experience_id','id')->where('time','>=',$start)->where('time','<=',$end)->pluck('time')->toArray();
+        dd($conf);
+
     }
 
     /**
