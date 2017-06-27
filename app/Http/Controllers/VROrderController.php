@@ -29,22 +29,22 @@ class VROrderController extends Controller
 
         return view('admin.adminList', $conf);
     }
+
     /**
      * Show the form for creating a new resource.
      * GET /vrorder/reserved
      *
      * @return Response
      */
-    public function reserved ()
+    public function reserved()
     {
-        $data= request()->all();
+        $data = request()->all();
 
+        $start = Carbon::parse($data['time'])->startOfDay();
+        $end = Carbon::parse($data['time'])->endOfDay();
 
-        $start = Carbon::parse('time',$data)->startOfDay();
-        $end = Carbon::parse('time',$data)->endOfDay();
+        return (VRReservations::where('experience_id', $data)->where('time', '>=', $start)->where('time', '<=', $end)->pluck('time')->toArray());
 
-        $conf = VRReservations::where('experience_id','id')->where('time','>=',$start)->where('time','<=',$end)->pluck('time')->toArray();
-        dd($conf);
 
     }
 
@@ -180,9 +180,9 @@ class VROrderController extends Controller
             'type' => 'dropdown',
             'key' => 'vr_rooms',
             'options' => VRPages::
-            where('category_id','vr_rooms')->
-            join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->
-            pluck('vr_pages_translations.title','vr_pages.id')->
+            where('category_id', 'vr_rooms')->
+            join('vr_pages_translations', 'vr_pages.id', '=', 'vr_pages_translations.record_id')->
+            pluck('vr_pages_translations.title', 'vr_pages.id')->
             toArray(),
         ];
 
@@ -192,8 +192,6 @@ class VROrderController extends Controller
             'key' => 'time',
             'options' => $this->getData(),
         ];
-
-
         return $conf;
     }
 
