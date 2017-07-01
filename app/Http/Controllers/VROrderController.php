@@ -60,7 +60,8 @@ class VROrderController extends Controller
 
 //        dd(VRPages::where('category_id','vr_rooms')->join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->get()->toArray());
         $conf = $this->getFormData();
-
+        $pagesData = (new VRPages)->getTable();
+dd($pagesData);
         $conf['title'] = trans('app.orders');
         $conf['new'] = route('app.order.create');
         $conf['back'] = 'app.order.index';
@@ -108,6 +109,8 @@ class VROrderController extends Controller
 
 
         $conf = $this->getFormData();
+        $conf['user_email'] = VRUsers::find(VROrder::find($id)->user_id)->toArray();
+
         $conf['title'] = $id;
         $conf['new'] = route('app.order.edit', $id);
         $conf['back'] = 'app.order.index';
@@ -144,6 +147,13 @@ class VROrderController extends Controller
 
         return ["success" => true, "id" => $id];
     }
+    private function getVRroomsWithcategory()
+    {
+        $pagesData = (new VRPages)->getTable();
+        $pagesDataTrans = (new VRPagesTranslations)->getTable();
+        return (VRPages::where('category_id', 'vr_room')->join($pagesDataTrans, "$pagesDataTrans.record_id", '=' ,"$pagesData.id")
+            ->pluck("$pagesDataTrans.title", "$pagesData.id")->toArray());
+    }
 
     public function getFormData()
     {
@@ -166,11 +176,6 @@ class VROrderController extends Controller
 //                        'name' => 'approved',
 //                        'value' => 'approved',
 //                    ]
-        $conf['fields'][] = [
-            'type' => 'dropdown',
-            'key' => 'user_id',
-            'options' => VRUsers::pluck('email', 'id')->toArray(),
-        ];
 
         $language = request('language_code');
         if ($language == null) {
@@ -179,18 +184,22 @@ class VROrderController extends Controller
         $conf['fields'][] = [
             'type' => 'dropdown',
             'key' => 'vr_rooms',
-            'options' => VRPages::
-            where('category_id', 'vr_rooms')->
-            join('vr_pages_translations', 'vr_pages.id', '=', 'vr_pages_translations.record_id')->
-            pluck('vr_pages_translations.title', 'vr_pages.id')->
-            toArray(),
+            'options' => $this->getVRroomsWithcategory()
         ];
-
+        $conf['fields'][] = [
+            "type" => "user_down",
+            "key" => "user_id",
+            "options" => VRUsers::pluck('email', 'id')->toArray()
+        ];
 
         $conf['fields'][] = [
             'type' => 'dropdown',
             'key' => 'time',
             'options' => $this->getData(),
+        ];
+        $conf['fields'][] = [
+            "type" => "reservations",
+            "key" => "reservations",
         ];
         return $conf;
     }
