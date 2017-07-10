@@ -119,12 +119,9 @@
     <script>
         $('#language_code').bind("change", function () {
 //            console.log(window.location.href)
-                window.location.href = "?language_code=" + $('#language_code').val();
+            window.location.href = "?language_code=" + $('#language_code').val();
 //            alert($('#language_code').val())
-            }
-<<<<<<< HEAD
-        );
-
+        });
         var $time = $('#time');
         var $vr_rooms = $('#vr_rooms');
 
@@ -211,44 +208,10 @@
                 console.log($(e.currentTarget).val());
                 $('#reservations-invisible').append('<input id="' + $(this).attr('value') + '" type="checkbox" name="' + $(this).attr('name') + '" value="' + $(this).attr('value') + '" checked>');
             });
-=======
-        )
-
-        var time = $('#time');
-        var vr_rooms = $('#vr_rooms');
-
-        if (time.length > 0 &&
-            (vr_rooms.length > 0))
-        {
-
-            vr_rooms.bind("change", getAvalebleHouers);
-            time.bind("change", getAvalebleHouers);
-
-            function getAvalebleHouers() {
-
-                console.log(vr_rooms.val(), time.val())
-                $.ajax({
-                    url: '{{route('app.order.reserved')}}',
-
-                    type: 'GET',
-                    data: {
-                        time: time.val(),
-                        experience_id: vr_rooms.val()
-                    },
-
-                    success: function (response) {
-                        console.log(response);
-                    },
-
-                    error: function () {
-                        alert('ERROR');
-                    }
-
-                });
-
-            }
->>>>>>> 94afe57cd2c8580f6a355b2cd604c51ffc9f9afa
         }
+
+
+
 
 
     </script>
