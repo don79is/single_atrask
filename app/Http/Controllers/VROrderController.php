@@ -58,10 +58,8 @@ class VROrderController extends Controller
     {
 
 
-//        dd(VRPages::where('category_id','vr_rooms')->join('vr_pages_translations','vr_pages.id','=','vr_pages_translations.record_id')->get()->toArray());
         $conf = $this->getFormData();
-        $pagesData = (new VRPages)->getTable();
-dd($pagesData);
+
         $conf['title'] = trans('app.orders');
         $conf['new'] = route('app.order.create');
         $conf['back'] = 'app.order.index';
@@ -151,7 +149,7 @@ dd($pagesData);
     {
         $pagesData = (new VRPages)->getTable();
         $pagesDataTrans = (new VRPagesTranslations)->getTable();
-        return (VRPages::where('category_id', 'vr_room')->join($pagesDataTrans, "$pagesDataTrans.record_id", '=' ,"$pagesData.id")
+        return (VRPages::where('category_id', 'vr_rooms')->join($pagesDataTrans, "$pagesDataTrans.record_id", '=' ,"$pagesData.id")
             ->pluck("$pagesDataTrans.title", "$pagesData.id")->toArray());
     }
 
