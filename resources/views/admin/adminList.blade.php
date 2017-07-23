@@ -74,13 +74,17 @@
                                 <td>  {{$value}}</td>
                             @endif
                         @endforeach
+                            @if(isset ($show))
+                                <td><a class="btn btn-success"
+                                       href="{{ route($show, $item['id']) }}">{{ trans('app.show') }}</a></td>
+                            @endif
                         @if(isset ($edit))
                             <td><a class="btn btn-info"
                                    href="{{ route($edit, $item['id']) }}">{{ trans('app.edit') }}</a></td>
                         @endif
                         @if(isset ($delete))
                             <td>
-                                <button class="btn btn-warning"
+                                <button class="btn btn-danger"
                                         onclick="deleteItem('{{route( $delete, $item['id'])}}', 0)">{{ trans('app.delete') }}</button>
                             </td>
                         @endif

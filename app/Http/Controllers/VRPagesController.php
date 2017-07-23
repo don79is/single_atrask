@@ -25,7 +25,7 @@ class VRPagesController extends Controller
             $conf['new'] = route('app.pages.create');
             $conf['title'] = trans('app.pages');
 
-
+            $conf['show'] = 'app.pages.show';
             $conf['create'] = 'app.pages.create';
             $conf['edit'] = 'app.pages.edit';
             $conf['delete'] = 'app.pages.delete';
@@ -62,7 +62,6 @@ class VRPagesController extends Controller
         $data = request()->all();
 
 
-
         $resources = request()->file('file');
 
         $uploadController = new VRResourcesController();
@@ -88,9 +87,17 @@ class VRPagesController extends Controller
      * @return Response
      */
     public
-    function show($id)
+    function adminShow($id)
     {
-        //
+        $data = VRPages::find($id)->toArray();
+//        dd($data);
+        $conf['title'] = $data['translation']['title'];
+        $conf['description_short'] = $data['translation']['description_short'];
+        $conf['description_long'] = $data['translation']['description_long'];
+        $conf['path'] = $data ['image']['path'];
+        $conf['edit'] = route('app.pages.edit',$id);
+        $conf['back'] = route('app.pages.index');
+        return view('admin.pageShow', $conf);
     }
 
     /**
@@ -187,7 +194,6 @@ class VRPagesController extends Controller
             "key" => "image",
             "file" => VRResources::pluck('path', 'id')->toArray()
         ];
-
 
 
         return $conf;

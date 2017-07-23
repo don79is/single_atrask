@@ -7,6 +7,7 @@ return [
     "pages" => "Puslapiai",
     "translations" => "Vertimai",
     "no-data" => "Nėra duomenų",
+    "show" =>"Rodyti",
     "success" => "Aktyvus",
     "danger" => "Išjungtas",
     "categories" => "Kategorijos",
