@@ -43,6 +43,7 @@ class VRPagesController extends Controller
     public function adminCreate()
     {
         $conf = $this->getFormData();
+//        dd($conf);
 
         $conf['title'] = trans('app.pages');
         $conf['new'] = route('app.pages.create');
@@ -97,6 +98,7 @@ class VRPagesController extends Controller
         $conf['path'] = $data ['image']['path'];
         $conf['edit'] = route('app.pages.edit',$id);
         $conf['back'] = route('app.pages.index');
+
         return view('admin.pageShow', $conf);
     }
 
